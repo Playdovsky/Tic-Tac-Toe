@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "G:\\Visual Studio repos\\repos\\tic-tac-toe\\tic-tac-toe\\tic-tac-toe.csproj",
+      "projectUniqueName": "C:\\Users\\tubix\\OneDrive\\Documents\\GitHub\\tic-tac-toe\\tic-tac-toe\\tic-tac-toe\\tic-tac-toe.csproj",
       "projectName": "tic-tac-toe",
-      "projectPath": "G:\\Visual Studio repos\\repos\\tic-tac-toe\\tic-tac-toe\\tic-tac-toe.csproj",
+      "projectPath": "C:\\Users\\tubix\\OneDrive\\Documents\\GitHub\\tic-tac-toe\\tic-tac-toe\\tic-tac-toe\\tic-tac-toe.csproj",
       "packagesPath": "C:\\Users\\tubix\\.nuget\\packages\\",
-      "outputPath": "G:\\Visual Studio repos\\repos\\tic-tac-toe\\tic-tac-toe\\obj\\",
+      "outputPath": "C:\\Users\\tubix\\OneDrive\\Documents\\GitHub\\tic-tac-toe\\tic-tac-toe\\tic-tac-toe\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

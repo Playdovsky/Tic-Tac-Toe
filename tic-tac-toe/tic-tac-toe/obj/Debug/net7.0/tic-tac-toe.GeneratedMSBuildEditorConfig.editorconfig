@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = tic_tac_toe
-build_property.ProjectDir = G:\Visual Studio repos\repos\tic-tac-toe\tic-tac-toe\
+build_property.ProjectDir = C:\Users\tubix\OneDrive\Documents\GitHub\tic-tac-toe\tic-tac-toe\tic-tac-toe\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
