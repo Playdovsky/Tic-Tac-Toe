@@ -1,6 +1,7 @@
 ﻿using System.Collections;
+using System.Numerics;
 
-Console.WriteLine("Welcome to tic-tac-toe game!\nXOXOXOXOXOXOXOXOXOX");
+Console.WriteLine("  Welcome to tic-tac-toe game!\nXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOX\n");
 Console.WriteLine("It's two player game, so in order to play you have to bring your friend or... play lonely with yourself.\n\n");
 Console.WriteLine("Should the player 1 be an 'X' or an 'O'?");
 
@@ -38,6 +39,7 @@ void MainGame(char player1, char player2)
 
     char[,] gameHash = new char[3, 3];
     bool player1Move = true;
+    int tie = 0;
 
     for (int i = 0; i < gameHash.GetLength(0); i++)
     {
@@ -48,19 +50,19 @@ void MainGame(char player1, char player2)
     }
 
     Console.WriteLine(
-    $"     0 1 2\n" +
+    $"     1 2 3\n" +
     $"     -----\n" +
-    $"\n0|    | | " +
-    $"\n |   -+-+-" +
     $"\n1|    | | " +
     $"\n |   -+-+-" +
     $"\n2|    | | " +
+    $"\n |   -+-+-" +
+    $"\n3|    | | " +
     $"\n"
     );
-    Turns(player1, player2, gameHash, player1Move);
+    Turns(player1, player2, gameHash, player1Move, tie);
 }
 
-void Turns(char player1, char player2, char[,] gameHash, bool player1Move)
+void Turns(char player1, char player2, char[,] gameHash, bool player1Move, int tie)
 {
     Console.WriteLine("Player " + ((player1Move == true) ? "1 " : "2 ") + "where do you want to set your mark ?");
     int x, y;
@@ -74,7 +76,7 @@ void Turns(char player1, char player2, char[,] gameHash, bool player1Move)
             Console.WriteLine("write an y axis value");
             y = int.Parse(Console.ReadLine());
 
-            if (gameHash[y, x] == ' ')
+            if (gameHash[y - 1, x - 1] == ' ')
             {
                 break;
             }
@@ -93,24 +95,62 @@ void Turns(char player1, char player2, char[,] gameHash, bool player1Move)
 
     if (player1Move)
     {
-        gameHash[y, x] = 'X';
+        gameHash[y - 1, x - 1] = player1;
         player1Move = false;
     }
     else
     {
-        gameHash[y, x] = 'O';
+        gameHash[y -1, x - 1] = player2;
         player1Move = true;
     }
 
     Console.WriteLine(
-        $"     0 1 2\n" +
+        $"     1 2 3\n" +
         $"     -----\n" +
-        $"\n0|   {gameHash[0, 0]}|{gameHash[0, 1]}|{gameHash[0, 2]}" +
+        $"\n1|   {gameHash[0, 0]}|{gameHash[0, 1]}|{gameHash[0, 2]}" +
         $"\n |   -+-+-" +
-        $"\n1|   {gameHash[1, 0]}|{gameHash[1, 1]}|{gameHash[1, 2]}" +
+        $"\n2|   {gameHash[1, 0]}|{gameHash[1, 1]}|{gameHash[1, 2]}" +
         $"\n |   -+-+-" +
-        $"\n2|   {gameHash[2, 0]}|{gameHash[2, 1]}|{gameHash[2, 2]}"
+        $"\n3|   {gameHash[2, 0]}|{gameHash[2, 1]}|{gameHash[2, 2]}"
         );
 
-    Turns(player1, player2, gameHash, player1Move);
+    if (CheckIfWin(gameHash))
+    {
+        Console.WriteLine("\nPlayer " + ((player1Move == false) ? "1 " : "2 ") + "has won!");
+        return;
+    }
+    else if(tie == 8)
+    {
+        Console.WriteLine("\nThere's no winner. It's a tie!");
+        return;
+    }
+
+    tie++;
+    Turns(player1, player2, gameHash, player1Move, tie);
+}
+
+bool CheckIfWin(char[,] gameHash)
+{
+    for (int x = 0; x < gameHash.GetLength(0); x++)
+    {
+        if (gameHash[x, 0] != ' ' && (gameHash[x, 0] == gameHash[x, 1] && gameHash[x, 1] == gameHash[x, 2]))
+        {
+            return true;
+        }
+    }
+
+    for (int y = 0; y < gameHash.GetLength(0); y++)
+    {
+        if (gameHash[0, y] != ' ' && (gameHash[0, y] == gameHash[1, y] && gameHash[1, y] == gameHash[2, y]))
+        {
+            return true;
+        }
+    }
+
+    if (gameHash[1, 1] != ' ' && ((gameHash[0, 0] == gameHash[1, 1] && gameHash[1, 1] == gameHash[2, 2]) || (gameHash[2, 0] == gameHash[1, 1] && gameHash[1, 1] == gameHash[0, 2])))
+    {
+        return true;
+    }
+
+    return false;
 }
