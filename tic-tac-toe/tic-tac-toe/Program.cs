@@ -1,45 +1,53 @@
 ﻿using System.Collections;
 using System.Numerics;
 
+
 Console.WriteLine("  Welcome to tic-tac-toe game!\nXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOX\n");
-Console.WriteLine("It's two player game, so in order to play you have to bring your friend or... play lonely with yourself.\n\n");
-Console.WriteLine("Should the player 1 be an 'X' or an 'O'?");
+Console.WriteLine("It's a two player game, so in order to play you have to bring your friend or... play lonely with yourself.\n\n");
 
-while (true)
+char[,] gameHash = new char[3, 3];
+bool player1Move = true;
+int tie = 0;
+Start();
+
+
+void Start()
 {
-    try
-    {
-        char player1 = char.Parse(Console.ReadLine());
-        char player2;
+    Console.WriteLine("Should the player 1 be an 'X' or an 'O'?");
 
-        switch (player1) {
-            case 'X':
-                player2 = 'O';
-                MainGame(player1, player2);
-                return;
-            case 'O':
-                player2 = 'X';
-                MainGame(player1, player2);
-                return;
-            default:
-                Console.WriteLine("Something went wrong, try again");
-                break;
+    while (true)
+    {
+        try
+        {
+            char player1 = char.Parse(Console.ReadLine());
+            char player2;
+
+            switch (player1) {
+                case 'X':
+                    player2 = 'O';
+                    MainGame(player1, player2);
+                    return;
+                case 'O':
+                    player2 = 'X';
+                    MainGame(player1, player2);
+                    return;
+                default:
+                    Console.WriteLine("Something went wrong, try again");
+                    break;
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"{ex.Message}\nTry again.");
         }
     }
-    catch (Exception ex)
-    {
-        Console.WriteLine($"{ex.Message}\nTry again.");
-    }
 }
+
 
 void MainGame(char player1, char player2)
 {
     Console.WriteLine($"Then settings are as follows\nPlayer 1:{player1}\nPlayer 2:{player2}");
     Console.WriteLine("Qucik reminder: remember to set coordinates separatly according to demanded axis.\n");
-
-    char[,] gameHash = new char[3, 3];
-    bool player1Move = true;
-    int tie = 0;
 
     for (int i = 0; i < gameHash.GetLength(0); i++)
     {
@@ -59,10 +67,11 @@ void MainGame(char player1, char player2)
     $"\n3|    | | " +
     $"\n"
     );
-    Turns(player1, player2, gameHash, player1Move, tie);
+    Turns(player1, player2);
 }
 
-void Turns(char player1, char player2, char[,] gameHash, bool player1Move, int tie)
+
+void Turns(char player1, char player2)
 {
     Console.WriteLine("Player " + ((player1Move == true) ? "1 " : "2 ") + "where do you want to set your mark ?");
     int x, y;
@@ -114,22 +123,23 @@ void Turns(char player1, char player2, char[,] gameHash, bool player1Move, int t
         $"\n3|   {gameHash[2, 0]}|{gameHash[2, 1]}|{gameHash[2, 2]}"
         );
 
-    if (CheckIfWin(gameHash))
+    if (CheckIfWin())
     {
         Console.WriteLine("\nPlayer " + ((player1Move == false) ? "1 " : "2 ") + "has won!");
-        return;
+        PlayAgain();
     }
     else if(tie == 8)
     {
         Console.WriteLine("\nThere's no winner. It's a tie!");
-        return;
+        PlayAgain();
     }
 
     tie++;
-    Turns(player1, player2, gameHash, player1Move, tie);
+    Turns(player1, player2);
 }
 
-bool CheckIfWin(char[,] gameHash)
+
+bool CheckIfWin()
 {
     for (int x = 0; x < gameHash.GetLength(0); x++)
     {
@@ -153,4 +163,24 @@ bool CheckIfWin(char[,] gameHash)
     }
 
     return false;
+}
+
+
+void PlayAgain()
+{
+    Console.WriteLine("Do you want to play again?\nPress 'ENTER' to start new game, otherwise app will be closed.");
+    ConsoleKeyInfo cki = Console.ReadKey();
+
+    if (cki.Key == ConsoleKey.Enter)
+    {
+        Console.Clear();
+        char[,] gameHash = new char[3, 3];
+        player1Move = true;
+        tie = 0;
+        Start();
+    }
+    else
+    {
+        Environment.Exit(0);
+    }
 }
