@@ -209,7 +209,7 @@ public class TwoPlayersGame
     }
 
     /// <summary>
-    /// Draws a game hash.
+    /// Draws a game hash of tic-tac-toe.
     /// </summary>
     /// <param name="gameHash"></param>
     /// <returns>String of every array element</returns>
