@@ -191,7 +191,7 @@ public class TwoPlayersGame
     /// <summary>
     /// Draws a blank game hash of tic-tac-toe.
     /// </summary>
-    /// <returns>String of blank game hash</returns>
+    /// <returns>String of blank game hash of tic-tac-toe</returns>
     private static string DrawHash()
     {
         string hash = (
